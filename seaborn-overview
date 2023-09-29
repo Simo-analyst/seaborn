@@ -1,0 +1,84 @@
+import pandas as pd
+import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+import warnings
+warnings.filterwarnings('ignore')
+
+sns.get_dataset_names()
+
+df=sns.load_dataset('iris')
+df.head()
+
+# grouping by species
+df.groupby('species')['sepal_length','sepal_width','petal_length','petal_width'].mean().sort_values(by='sepal_length')
+
+sns.set_style('darkgrid')
+sns.boxplot(df['sepal_length'])
+plt.show()
+
+df['sepal_length'].skew()
+
+# skewness is positive indicating that mean is greater than mean
+df['sepal_length'].mean()
+
+df['sepal_length'].median()
+
+sns.jointplot(x='sepal_length',y='petal_length',data=df,kind='kde',fill=True)
+plt.show()
+
+sns.jointplot(x='sepal_length',y='petal_length',data=df,kind='hex')
+plt.show()
+
+sns.scatterplot(x='petal_width',y='sepal_length',data=df,hue='species')
+plt.show()
+
+sns.histplot(df['sepal_length'],kde=True)
+plt.show()
+
+1.most values lie between 5.5 and 6.6
+
+# creating a jointplot showing regression
+sns.jointplot(x='sepal_length',y='petal_length',data=df,kind='reg')
+plt.show()
+
+# creating list
+marks=[42,76,80,90,64]
+
+# checking the length ot our list
+print(len(marks))
+
+# adding data to our list
+marks.append(58)
+marks
+
+# indexing 
+marks[0]
+
+# deleting the last element in the list marks
+marks.pop()
+
+# now our length should be 5
+print(len(marks))
+
+# removing elements from a list
+marks.remove(42)
+
+marks
+
+# inserting elements in a list
+marks.insert(0,44)
+
+marks
+
+labels=['chemistry','mathematics','geography','biology','physics']
+
+explode=[0.3,0,0,0,0]
+
+plt.pie(marks,labels=labels,explode=explode,autopct='%.2f%%',shadow=True)
+plt.show()
+
+sns.pairplot(df,hue='species')
+plt.show()
+
